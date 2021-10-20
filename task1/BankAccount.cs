@@ -66,7 +66,7 @@ namespace task1
             Type = type;
         }
 
-        public void GetMoney(decimal amount)
+        public bool GetMoney(decimal amount)
         {
             if (this.Balance >= amount)
             {
@@ -75,12 +75,22 @@ namespace task1
             else
             {
                 Console.WriteLine("Недостаточно средств на счете");
+                return false;
             }
+            return true;
         }
 
         public void IncreaseBalance(decimal amount)
         {
             this.Balance += amount;
+        }
+
+        public void TransferMoney(BankAccount donorAccount, decimal amount)
+        {
+            if(donorAccount.GetMoney(amount))
+            {
+                this.Balance += amount;
+            }
         }
     }
 }
